@@ -14,6 +14,7 @@ class QuestionAdmin(admin.ModelAdmin):
         ("Date information", {"fields": ["pub_date"], "classes": ["collapse"]}),
     ]
     inlines = [ChoiceInline]
+    # prepopulated_fields = {'slug': ("question_text",)}
     
 
 

@@ -1,0 +1,12 @@
+{% extends 'blog/base2.html' %}
+{% block content %}
+{% for c in cat %}
+<article class="post">
+    <time class="date">
+        {{ c.published_date }}
+    </time>
+    <h2><a href="{% url 'category'}">{{ c.name }}</a></h2>
+    <p>{{ c.text|linebreaksbr }}</p>
+</article>
+{% endfor %}
+{% endblock %}
