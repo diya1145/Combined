@@ -7,5 +7,9 @@ urlpatterns = [
     path('post/new/', views.post_new, name='post_new'),
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
     path('category', views.category, name='category'),
+    path('tags', views.tags, name='tags'),
+    path('category/<int:category_id>/', views.category_detail, name='category_detail'),
 
 ]
+
+

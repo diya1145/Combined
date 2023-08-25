@@ -19,10 +19,19 @@ def category(request):
     cat = Category.objects.all()
     return render(request, 'blog/category.html', {'cat': cat})
 
+def tags(request):
+    tags = Tags.objects.all()
+    return render(request, 'blog/tags.html', {'tag': tags})
 
 def post_new(request):
     form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+def category_detail(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    post = Post.objects.filter()
+    return render(request, 'blog/post_detail.html', {'category': category, 'posts': post})
 
 def post_new(request):
     if request.method == "POST":
@@ -50,3 +59,4 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
