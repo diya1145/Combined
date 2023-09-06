@@ -1,3 +1,5 @@
+{% extends 'blog/base.html' %}
+{% block content %}
 <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
@@ -5,9 +7,9 @@
     <input type="text" name="username" required><br>
     <label for="password">Password:</label>
     <input type="password" name="password" required><br>
-    <type="submit"><a href="/">Login</a>
+    <button type="submit">Login</button>
   </form>
-  <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
-
+  <class="text-center">Don't have an account? <a href="/register">Create an account</a>
+{% endblock %} 
 
   

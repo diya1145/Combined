@@ -129,4 +129,9 @@ STATIC_ROOT = BASE_DIR / 'static'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-
 
 # MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR.join_path('media/')
+# MEDIA_ROOT = BASE_DIR.join_path('media/') 
+
+
+
+
+AUTH_USER_MODEL = 'blog.User'

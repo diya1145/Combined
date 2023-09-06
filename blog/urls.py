@@ -17,13 +17,14 @@ urlpatterns = [
     path('tags', views.tags, name='tags'),
     path('category/<int:category_id>/', views.category_detail, name='category_detail'),
     path('register/', views.register, name='register'),
-    path('login/', views.login, name='login'),
-    path('logout/', views.logout, name='logout'),
-    path('profile/<int:pk>/edit/', views.edit, name='edit_profile'),
-    path('update/', views.update, name='update'),
-    path('register/<int:pk>/', views.post_detail, name='register_detail'),
+    path('login/', views.user_login, name='user_login'),
+    path('logout/', views.user_logout, name='user_logout'),
+    path('update/<int:pk>/edit/', views.edit_profile, name='profileupdate'),
+    path('author_list', views.author_list, name='author_profile_list.html'),
 
+    
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(

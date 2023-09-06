@@ -99,59 +99,56 @@ def post_edit(request, pk):
     return render(request, 'blog/post_edit.html', {'form': form})
 
 def register(request):
+    form = RegisterForm()
     if request.method == 'POST':
-        form = RegistrationForm1(request.POST)  
+        form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('blog:post_list')
+            user = authenticate(
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password1'],
+            )
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+        return render(request, 'blog/register.html', {'form': form})
     else:
-        form = RegistrationForm()
-    return render(request, 'blog/register.html', {'form': form})
+        return render(request, 'blog/register.html', {'form': form})
 
-# def login(request):
-#     if request.method == 'POST':
-#         form = RegistrationForm1(request.POST)
-#         if form.is_valid():
-#             username = request.POST.get('username')
-#             password = request.POST.get('password')
-#             user = authenticate(request, username = username, password = password)
-            
-#         if user is not None:
-#             login(request, user)
-#             messages.success(request,'Successfully Loggedin')
-#             return redirect('blog:/') 
-#         else:
-#             messages.error(request,'Sorry Try again')   
-#      else:
-# 			messages.error(request,"Invalid username or password.")
-# 	form = AuthenticationForm()
-#     return render(request, 'blog/login.html')
-
-
-def logout(request):
-        # if request.method == 'POST':
-        auth.logout(request)
-        messages.success(request,'Successfully Loggedout')
-        return redirect('/')
-
-def edit(request, pk):
-    form = get_object_or_404(Post, pk=pk)
+def user_login(request):    
     if request.method == "POST":
-        form = RegistrationForm1(request.POST, instance=post)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.author = request.user
-            form.published_date = timezone.now()
-            form.save()
-            return redirect('blog/post_detail', pk=post.pk)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.info(request, f"You are now logged in as {username}.")
+            return redirect("/")
+        else:
+            messages.error(request,"Invalid username or password.")
     else:
-        form = PostForm(instance=post)
-    return render(request, 'blog/update.html', {'form': form})
+        form = RegisterForm()
+        messages.error(request,"Invalid username or password.")
+    return render(request, 'blog/login.html')
 
-def update(request):
-    username = models.CharField(max_length=100)
-    email = models.TextField()
-    password = models.CharField(max_length=50)
-    form = RegistrationForm1(request.POST)
-    return render(request,'blog/edit.html', {'form': form})  
+def user_logout(request):
+    logout(request)
+    return redirect('/')  
 
+def edit_profile(request, pk):
+    # user = User.objects.get(pk = pk)
+    user = get_object_or_404(User, pk=pk)
+    print('user',user)
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            print('form is valid')
+            form.save()
+            return redirect('/')  # Redirect to the user's profile after editing
+    else:
+        form = UserForm(instance=request.user)
+    return render(request, 'blog/profile_update.html', {'form': form})
+
+def author_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog:author_list.html', {'posts': posts})

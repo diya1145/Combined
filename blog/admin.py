@@ -1,11 +1,10 @@
 from django.contrib import admin
 from django.http import HttpResponse
-from .models import Post,Category,Tags,RegistrationForm,update,Comment
+from .models import Post,Category,Tags,Comment,User
 from import_export.admin import ImportExportMixin
 
 
-admin.site.register(update)
-
+admin.site.register(User)
 
 
 
@@ -16,12 +15,12 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Post,PostAdmin)
 
 
-class RegisterAdmin(admin.ModelAdmin):
-    list_display = ("username", "email",'password')
-    list_filter = ('username','email','password')
+# class RegisterAdmin(admin.ModelAdmin):
+#     list_display = ("username", "email",'password')
+#     list_filter = ('username','email','password')
 
 
-admin.site.register(RegistrationForm,RegisterAdmin)
+# admin.site.register(RegistrationForm,RegisterAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
