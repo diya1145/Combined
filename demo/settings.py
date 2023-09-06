@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'polls',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'demo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/home/fahmida/django_pro/formapp/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +71,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'demo.wsgi.application'
+# LOGIN_REDIRECT_URL = 'profile'  
+# LOGOUT_REDIRECT_URL = 'login'   
 
 
 # Database
@@ -123,6 +126,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR.join_path('media/')

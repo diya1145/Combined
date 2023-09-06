@@ -11,11 +11,11 @@
         <header class="page-header">
             <div class="container">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'post_new' %}" class="top-menu">
+                    <a href="{% url 'blog:post_new' %}" class="top-menu">
                         {% include './icons/file-earmark-plus.svg' %}
                     </a>
                 {% endif %}
-                <h5><a href="/">Django Girls Blog</a> <a href="category"> Categories</a></h5> <a href="tags"> tags</a></h5>
+                <h5><a href="/">Django Girls Blog</a> <a href="category"> Categories</a></h5> <a href="tags"> tags</a></h5><a href="register/"> register</a></h5>
                        
           </div>
         </header>
@@ -29,3 +29,13 @@
         </main>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

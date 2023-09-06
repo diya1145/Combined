@@ -5,7 +5,7 @@
     <time class="date">
         {{ c.published_date }}
     </time>
-    <h2><a href="{% url 'category_detail' c.id %}">{{ c.name }}</a></h2>
+    <h2><a href="{% url 'blog:category_detail' c.id %}">{{ c.name }}</a></h2>
     <p>{{ c.text|linebreaksbr }}</p>
 </article>
 {% endfor %}
