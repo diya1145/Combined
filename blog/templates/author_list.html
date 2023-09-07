@@ -2,17 +2,28 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+<br><img src="{{detail.user_profile.url}}" alt=" Avatar" style="width:100px;border-radius: 50%;"></br>
+{{detail.id}}  {{detail.username}}
+
+<br>{{detail.email}}</br>
+<br>{{detail.city}}</br>
+<br>{{detail.gender}}</br>
+<br>{{detail.state}}</br>
+<br>{{detail.country}}</br>
+
+
+
     {% for post in posts %}
         <article class="post">
             <time class="date">
                 {{ post.published_date }}
             </time>
-            <!-- <h2><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h2> -->
+            <h2><a href="{% url 'blog:author_profile_list' pk=post.pk %}">{{ detail.first_name }}</a></h2>
             <p>{{ post.text|linebreaksbr }}</p>
             <samp>      
     {% if post.image %}
         
-        <!-- <img src="{{ post.image.url }}" alt=" Avatar" style="width:100px;border-radius: 50%;"> -->
+        <img src="{{ post.image.url }}" alt=" Avatar" style="width:100px;border-radius: 50%;">
     {% endif %}
 
         </samp>

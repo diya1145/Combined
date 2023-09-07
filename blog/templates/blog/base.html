@@ -7,6 +7,7 @@
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
+    
     <body>
         <header class="page-header">
             <div class="container">
@@ -14,12 +15,14 @@
                     <a href="{% url 'blog:post_new' %}" class="top-menu">
                         <a href="logout"> Logout</a>
                         <a href="/update/{{user.id}}/edit/"> Update</a></h5>
+                        <a href="post/new/">
                         {% include './icons/file-earmark-plus.svg' %}
-                    </a>
+                        </a>
                     {%else %}
                     <a href="register">Register</a><a href="login"> Login</a>
                     {% endif %}
-                  <h5><a href="/">Django Girls Blog</a> <a href="category"> Categories</a> <a href="tags"> tags</a>
+                  <h5><a href="/">Django Girls Blog</a> <a href="% url category"> Categories</a> <a href="tags"> tags</a>
+                    
           </div>    
         </header>
         <main class="content container">
@@ -32,8 +35,6 @@
         </main>
 </body>
 </html>
-
-
 
 
 

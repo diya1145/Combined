@@ -1,21 +1,22 @@
+
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <article class="cat">
-        <aside class="actions">
-            {% if user.is_authenticated %}
-     <a class="btn btn-secondary" href="{% url 'blog:category_detail' cat' %}">
-        {% include './icons/pencil-fill.svg' %}
-     </a>
-{% endif %}
-        </aside>
-        {% if cat.published_date %}
+    {% for post in posts %}
+        <article class="post">
             <time class="date">
-                {{ cat.published_date }}
+                {{ post.published_date }}
             </time>
-        {% endif %}
-        <h2>{{ cat.title }}</h2>
-        <p>{{ cat.text|linebreaksbr }}</p>
+            <h2><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+            <samp>      
+    {% if post.image %}
         
-    </article>
+        <img src="{{ post.image.url }}" alt=" Avatar" style="width:100px;border-radius: 50%;">
+    {% endif %}
+
+        </samp>
+
+        </article>
+    {% endfor %}
 {% endblock %}

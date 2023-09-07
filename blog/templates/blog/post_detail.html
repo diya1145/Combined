@@ -28,7 +28,17 @@
         
         {% endif %}
 
+        <h2><a href="{% url 'blog:author_profile_list' pk=post.pk %}">author :{{post.author.first_name}}</a></h2>
+
+        </p>
         <p>{{ post.text|linebreaksbr }}</p>
+
+
+
+
+
+
+
         <h2>Add a new comment</h2>
         <form action="" method="POST">
             {% csrf_token %}

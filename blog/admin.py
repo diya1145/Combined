@@ -11,16 +11,9 @@ admin.site.register(User)
 class PostAdmin(admin.ModelAdmin):
     list_display = ("author", "category",'image')
     list_filter = ('author','category','image')
-    
+    view_on_site = True
 admin.site.register(Post,PostAdmin)
 
-
-# class RegisterAdmin(admin.ModelAdmin):
-#     list_display = ("username", "email",'password')
-#     list_filter = ('username','email','password')
-
-
-# admin.site.register(RegistrationForm,RegisterAdmin)
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -45,18 +38,24 @@ class TagAdmin(ImportExportMixin, admin.ModelAdmin):
 
     def export_to_csv(self, request, queryset):
         response = HttpResponse(content_type='text/csv')
-        # response['Content-Disposition'] = 'attachment; filename="your_model_data.csv"'
 
         writer = csv.writer(response)
-        writer.writerow(['name', 'text'])  # Add more field names here
+        writer.writerow(['name', 'text']) 
 
         for obj in queryset:
-            writer.writerow([obj.name, obj.text])  # Add more fields as needed
-
+            writer.writerow([obj.name, obj.text]) 
         return response
 
     export_to_csv.short_description = "Export selected items to CSV"
 
 admin.site.register(Tags,TagAdmin)
 
-    
+# def view_on_site_link(modeladmin, request, queryset):
+#     if queryset.count() == 1:
+#         post = queryset.first()
+#         url = reverse('post/<int:pk>/', args=[post.pk])  # Replace 'post_detail_url_name' with the actual URL name for your post detail view
+#         return format_html('<a href="{}" target="_blank">View on site</a>', url)
+#     else:
+#         return format_html('<p>Select only one post to view on site.</p>')
+
+# view_on_site_link.short_description = "View on Site"

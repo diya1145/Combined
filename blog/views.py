@@ -68,8 +68,8 @@ def post_new(request):
 
 def category_detail(request, category_id):
     category = get_object_or_404(Category, id=category_id)
-    post = Post.objects.filter()
-    return render(request, 'blog:post_detail.html', {'category': category, 'posts': post})
+    post = Post.objects.filter(category=category)
+    return render(request, 'blog/category_detail.html', {'category': category, 'posts': post})
 
 def post_new(request):
     if request.method == "POST":
@@ -136,7 +136,6 @@ def user_logout(request):
     return redirect('/')  
 
 def edit_profile(request, pk):
-    # user = User.objects.get(pk = pk)
     user = get_object_or_404(User, pk=pk)
     print('user',user)
     if request.method == 'POST':
@@ -144,11 +143,11 @@ def edit_profile(request, pk):
         if form.is_valid():
             print('form is valid')
             form.save()
-            return redirect('/')  # Redirect to the user's profile after editing
+            return redirect('/')  
     else:
         form = UserForm(instance=request.user)
     return render(request, 'blog/profile_update.html', {'form': form})
 
-def author_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'blog:author_list.html', {'posts': posts})
+def author_list(request,pk):
+    detail = User.objects.get(pk=pk)
+    return render(request, 'author_list.html', {'detail': detail})

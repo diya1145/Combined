@@ -20,9 +20,7 @@ urlpatterns = [
     path('login/', views.user_login, name='user_login'),
     path('logout/', views.user_logout, name='user_logout'),
     path('update/<int:pk>/edit/', views.edit_profile, name='profileupdate'),
-    path('author_list', views.author_list, name='author_profile_list.html'),
-
-    
+    path('author/<int:pk>/', views.author_list, name='author_profile_list'),
 ]
 
 

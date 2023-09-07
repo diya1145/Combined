@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
+from django.urls import reverse
 import csv
 
 
@@ -46,7 +47,11 @@ class Post(models.Model):
     @property
     def number_of_comments(self):
         return post_detail.objects.filter(post_comment=self).count()
+        
 
+    def get_absolute_url(self):
+        return reverse('blog:post_detail', args=[str(self.id)])
+        
 class User(AbstractUser):
         GENDER_CHOICES = (
             ('M', 'Male'),
